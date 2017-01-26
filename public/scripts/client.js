@@ -1,3 +1,13 @@
 $(function(){
-  console.log('jq linked')
+  console.log('document ready')
+
+  getPets();
 });
+
+function getPets() {
+  $.ajax({
+    url: '/pets',
+    type: 'GET',
+    success: displayPets
+  });
+}

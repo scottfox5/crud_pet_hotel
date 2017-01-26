@@ -1,0 +1,19 @@
+TODO
+
+1. Create a database
+  - Create 3 tables: owners, pets, visits
+  - owners: first name, last name
+  - pets: name, breed, color
+  - visits: in, out
+
+2. Server side:
+  - Route for GETing pet info
+  - Route for POSTing new pets
+
+  - Route for updating pets
+  - Route for deleting pets
+
+3. Client side:
+  - AJAX call for getting pets
+  - AJAX call for creating pets
+  - some way to display pets
