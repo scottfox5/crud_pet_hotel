@@ -1,0 +1,25 @@
+{
+  "name": "crud_pet_hotel",
+  "version": "1.0.0",
+  "description": "pet hotel project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scottfox5/crud_pet_hotel.git"
+  },
+  "author": "Rukia, Priscilla, Tyler, Scott",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/scottfox5/crud_pet_hotel/issues"
+  },
+  "homepage": "https://github.com/scottfox5/crud_pet_hotel#readme",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "bootstrap": "^3.3.7",
+    "express": "^4.14.0",
+    "jquery": "^3.1.1"
+  }
+}
