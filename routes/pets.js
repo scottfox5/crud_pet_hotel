@@ -45,8 +45,8 @@ router.post("/", function(req, res) {
       done();
     } else {
       client.query(
-        "INSERT INTO owners (first_name, last_name, pet_id) VALUES ($1, $2, $3, $4, $5) RETURNING *;",
-        [ req.body.title, req.body.author, req.body.published, req.body.edition, req.body.publisher ],
+        "INSERT INTO owners (first_name, last_name, pet_id) VALUES ($1, $2, $3) RETURNING *;",
+        [ req.body.first_name, req.body.last_name],
         function(err, result) {
           done();
           if (err) {
