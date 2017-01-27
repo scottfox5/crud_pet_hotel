@@ -63,6 +63,7 @@ router.post("/", function(req, res) {
 });
 
 router.put('/:id', function(req, res){
+  console.log('updating pet', req.body);
   pool.connect(function(err, client, done){
     if (err) {
       console.log('Error connecting to DB', err);
@@ -70,7 +71,7 @@ router.put('/:id', function(req, res){
       done();
     } else {
       client.query('UPDATE pets SET name=$2, breed=$3, color=$4 WHERE id = $1 RETURNING *',
-                   [req.params.id, req.body.name, req.body.breed, req.body.color],
+                   [req.params.id, req.body.pet_name, req.body.breed, req.body.color],
                    function(err, result){
                      done();
                      if (err) {
