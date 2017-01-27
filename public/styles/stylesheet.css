@@ -10,6 +10,7 @@ h1 {
 .form-section {
   border: 2px black solid;
   padding: 20px;
+  background: ghostwhite;
 }
 
 form {
