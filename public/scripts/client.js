@@ -2,12 +2,14 @@ $(function(){
   console.log('document ready')
 
   getPets();
+  getOwners();
+  // ownerDropMenu();
 
   $('#pet-form').on('click', '#add-pet', addPet);
   $('#owner-form').on('click', '#register', addOwner);
 
-  // $('#book-list').on('click', '.save', updateBook);
-  // $('#book-list').on('click', '.delete', deleteBook);
+  $('#pet-table').on('click', '.update', updatePet);
+  $('#pet-table').on('click', '.delete', deletePet);
 
 });
 
@@ -15,23 +17,33 @@ function getPets() {
   $.ajax({
     url: '/pets',
     type: 'GET',
-    success: displayPets, ownerDropMenu
+    success: displayPets
   });
 }
 
-function ownerDropMenu(pets){
-  console.log(pets);
-    pets.forEach(function(pet){
-    $('#owner-options').append('<option value="' + pet.id + '">'  + pet.first_name + " " + pet.last_name + '</option>');
+function getOwners () {
+  $.ajax({
+    url: '/owners',
+    type: 'GET',
+    success: ownerDropMenu
+  });
+};
+
+function ownerDropMenu(owners){
+  $('#owner-options').empty();
+  console.log(owners);
+    owners.forEach(function(owner){
+      $('#owner-options').append('<option value="' + owner.id + '">'  + owner.first_name + " " + owner.last_name + '</option>');
   });
 }
 
 function displayPets(pets){
   console.log('Got pets from the server', pets);
+    $('#table-body').empty();
 
     pets.forEach(function(pet){
 
-    $('#owner-options').append('<option>'  + pet.first_name + " " + pet.last_name + '</option>');
+    // $('#owner-options').append('<option value="' + pet.owner_id +'">'  + pet.first_name + " " + pet.last_name + '</option>');
 
     var $tableRow = $('<tr></tr>');
 
@@ -39,6 +51,8 @@ function displayPets(pets){
     $tableRow.append('<td><input type="text" name="pet_name" value="' + pet.name + '"/></td>');
     $tableRow.append('<td><input type="text" name="breed" value="' + pet.breed + '"/></td>');
     $tableRow.append('<td><input type="text" name="color" value="' + pet.color + '"/></td>');
+
+
 
     var $updateButton = $('<td><button class="update btn btn-outline-success">Update</button></td>');
     $updateButton.data('id', pet.id);
@@ -67,7 +81,7 @@ function addPet(event) {
     url: '/pets',
     type: 'POST',
     data: formData,
-    success: displayPets
+    success: getPets
   });
 }
 
@@ -84,9 +98,38 @@ function addOwner(event) {
     url: '/owners',
     type: 'POST',
     data: formData,
-    success: ownerDropMenu
+    success: getOwners
   });
 }
+
+function updatePet(event) {
+  event.preventDefault();
+
+  var $button = $(this).parent();
+  var $table = $button.closest('tr');
+
+  var data = $table.find('input');
+  console.log(data);
+
+  $.ajax({
+    url: '/pets/' + $button.data('id'),
+    type: 'PUT',
+    data: data.serialize(),
+    success: getPets
+  });
+}
+
+
+// $(this) refers to the button that was clicked
+function deletePet (event){
+  event.preventDefault();
+  $.ajax({
+    url: '/pets/' + $(this).parent().data('id'),
+    type: 'DELETE',
+    success: getPets
+  });
+}
+
 
 // function displayPets(pets){
 //   console.log('Got pets from the server', pets);

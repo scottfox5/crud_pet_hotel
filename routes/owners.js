@@ -22,7 +22,7 @@ router.get("/", function(req, res) {
       // 1. sql string - the actual SQL query we want to running
       // 2. callback - function to run after the database gives us our result
       //               takes an error object and the result object as it's args
-      client.query("SELECT * FROM owners JOIN pets ON owners.id = pets.owner_id;", function(err, result) {
+      client.query("SELECT * FROM owners", function(err, result) {
         done();
         if (err) {
           console.log("Error querying DB", err);
