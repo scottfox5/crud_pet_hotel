@@ -2,6 +2,13 @@ $(function(){
   console.log('document ready')
 
   getPets();
+
+  $('#pet-form').on('click', '#add-pet', addPet);
+  $('#owner-form').on('click', '#register', addOwner);
+
+  // $('#book-list').on('click', '.save', updateBook);
+  // $('#book-list').on('click', '.delete', deleteBook);
+
 });
 
 function getPets() {
@@ -13,8 +20,9 @@ function getPets() {
 }
 
 function ownerDropMenu(pets){
+  console.log(pets);
     pets.forEach(function(pet){
-    $('#owner-options').append('<option>'  + pet.first_name + " " + pet.last_name + '</option>');
+    $('#owner-options').append('<option value="' + pet.id + '">'  + pet.first_name + " " + pet.last_name + '</option>');
   });
 }
 
@@ -42,6 +50,41 @@ function displayPets(pets){
 
     $('#pet-table').append($tableRow);
 
+  });
+}
+
+function addPet(event) {
+  // prevent browser from refreshing
+  event.preventDefault();
+
+  // get the info out of the form
+  var formData = $('#pet-form').serialize();
+
+  console.log(formData);
+  console.log($(this));
+  // send data to server
+  $.ajax({
+    url: '/pets',
+    type: 'POST',
+    data: formData,
+    success: displayPets
+  });
+}
+
+function addOwner(event) {
+  // prevent browser from refreshing
+  event.preventDefault();
+
+
+  // get the info out of the form
+  var formData = $('#owner-form').serialize();
+  console.log(formData);
+  // send data to server
+  $.ajax({
+    url: '/owners',
+    type: 'POST',
+    data: formData,
+    success: ownerDropMenu
   });
 }
 

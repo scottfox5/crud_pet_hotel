@@ -37,7 +37,7 @@ router.get("/", function(req, res) {
 });
 
 router.post("/", function(req, res) {
-
+  console.log('pet', req.body);
   pool.connect(function(err, client, done) {
     if (err) {
       console.log("Error connecting to DB", err);
@@ -45,8 +45,8 @@ router.post("/", function(req, res) {
       done();
     } else {
       client.query(
-        "INSERT INTO owners (first_name, last_name, pet_id) VALUES ($1, $2, $3) RETURNING *;",
-        [ req.body.first_name, req.body.last_name],
+        "INSERT INTO pets (name, breed, color,owner_id) VALUES ($1, $2, $3, $4) RETURNING *;",
+        [req.body.name, req.body.breed, req.body.color, req.body.owner_id],
         function(err, result) {
           done();
           if (err) {
@@ -61,6 +61,7 @@ router.post("/", function(req, res) {
     }
   });
 });
+
 
 
 
