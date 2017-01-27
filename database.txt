@@ -17,3 +17,24 @@ TODO
   - AJAX call for getting pets
   - AJAX call for creating pets
   - some way to display pets
+
+SQL statments
+
+
+CREATE TABLE owners (
+  first_name VARCHAR(20),
+  last_name VARCHAR(20)
+)
+
+CREATE TABLE pets (
+  name VARCHAR(20),
+  breed VARCHAR(20),
+  color VARCHAR(20),
+  owner_id INT
+)
+
+CREATE TABLE visits (
+  pet_id INT,
+  check_in DATE,
+  check_out DATE
+)
