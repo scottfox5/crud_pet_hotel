@@ -32,11 +32,11 @@ function displayPets(pets){
     $tableRow.append('<td><input type="text" name="breed" value="' + pet.breed + '"/></td>');
     $tableRow.append('<td><input type="text" name="color" value="' + pet.color + '"/></td>');
 
-    var $updateButton = $('<td><button class="update">Update</button></td>');
+    var $updateButton = $('<td><button class="update btn btn-outline-success">Update</button></td>');
     $updateButton.data('id', pet.id);
     $tableRow.append($updateButton);
 
-    var $deleteButton = $('<td><button class="delete">Delete</button></td>');
+    var $deleteButton = $('<td><button class="delete btn btn-outline-danger">Delete</button></td>');
     $deleteButton.data('id', pet.id);
     $tableRow.append($deleteButton);
 
